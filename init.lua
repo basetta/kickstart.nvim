@@ -903,6 +903,11 @@ require('lazy').setup({
         style = 'dark',
       }
     end,
+    config = function()
+      require('newpaper').setup {
+        style = 'dark',
+      }
+    end,
   },
 
   -- Highlight todo, notes, etc in comments
