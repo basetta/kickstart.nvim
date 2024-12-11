@@ -3,6 +3,12 @@ return {
   event = { 'BufReadPre', 'BufNewFile' },
   config = function()
     require('conform').setup {
+      settings = {
+        tsserver_format_options = {
+          insertSpaceBeforeFunctionParenthesis = true,
+          insertSpaceAfterConstructor = true,
+        },
+      },
       formatters_by_ft = {
         lua = { 'stylua' },
         javascript = { 'dprint' },
@@ -13,7 +19,12 @@ return {
       format_on_save = {
         -- These options will be passed to conform.format()
         timeout_ms = 500,
-        lsp_fallback = true,
+        lsp_fallback = false,
+      },
+      formatters = {
+        dprint = {
+          require_cwd = true,
+        },
       },
     }
 
