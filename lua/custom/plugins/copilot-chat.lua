@@ -9,14 +9,6 @@ local keys = {
     end,
     desc = 'CopilotChat - Quick chat',
   },
-  {
-    '<leader>cch',
-    function()
-      local actions = require 'CopilotChat.actions'
-      require('CopilotChat.integrations.telescope').pick(actions.help_actions())
-    end,
-    desc = 'CopilotChat - Help actions',
-  },
   -- Show prompts actions with telescope
   {
     '<leader>ccp',
@@ -30,16 +22,18 @@ local keys = {
 return {
   {
     'CopilotC-Nvim/CopilotChat.nvim',
-    branch = 'canary',
+    branch = 'main',
     dependencies = {
       { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
       { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
+      { 'nvim-telescope/telescope.nvim' },
     },
     keys = keys,
     build = 'make tiktoken', -- Only on MacOS or Linux
     opts = {
       debug = true, -- Enable debugging
-      -- See Configuration section for rest
+      show_help = true, -- Show help actions
+      auto_follow_cursor = false, -- Don't follow the cursor after getting response
     },
     -- See Commands section for default commands if you want to lazy load on them
   },
