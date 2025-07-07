@@ -778,10 +778,10 @@ require('lazy').setup({
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
+        javascript = { 'eslint_d' },
+        typescript = { 'eslint_d' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        javascript = { 'prettierd', 'prettier', stop_after_first = true },
-        typescript = { 'dprint' },
       },
     },
   },
@@ -792,6 +792,9 @@ require('lazy').setup({
     version = '1.*',
     dependencies = {
       -- Snippet Engine
+      {
+        'giuxtaposition/blink-cmp-copilot',
+      },
       {
         'L3MON4D3/LuaSnip',
         version = '2.*',
@@ -815,7 +818,19 @@ require('lazy').setup({
           --   end,
           -- },
         },
-        opts = {},
+        opts = {
+          sources = {
+            default = { 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
+            providers = {
+              copilot = {
+                name = 'copilot',
+                module = 'blink-cmp-copilot',
+                score_offset = 100,
+                async = true,
+              },
+            },
+          },
+        },
       },
       'folke/lazydev.nvim',
     },
